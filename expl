@@ -1,0 +1,39 @@
+##Modulo de explicabilidad
+
+# **Estructura de ficheros**
+-	**Data**
+En esta carpeta se han de incluir los ficheros de entrenamiento,  scoring y el diccionario de variables que se describen a continuación. También se puede incluir el modelo ya entrenado (si se incluye, el módulo lo cargará automáticamente, sino el entrenamiento se realizará en uno de los pasos del módulo)
+
+Tablón de entrenamiento y tablón de scoring: incluye variables no accionables mínimas imprescindibles requeridas para un modelo de churn  y todas las variables accionables. Incluye también la variable target.
+Variables factor de muchos niveles realentizan considerablemente el proceso.  Si no van a aportar a la explicabilidad (no son accionables) ni son transcendentales para entrenar el modelo (eg. provincia, nacionalidad, marca del terminal), se recomienda eliminarlas del tablón de entrada.
+
+
+Diccionario de variables: este fichero contiene 
+-	feature:  relación de variables incluídas en el tablón de entrenamiento (exceptuando el target)
+-	feature_trans:  un nombre “aclarativo” para aquellas variables cuyo nombre sea difícil de interpretar. Si no se quiere dar un nombres alternativo, copiar el nombre dado en la columna feature. 
+-	Root causes asociadas a cada variable : ROOT_CAUSE_1,   ROOT_CAUSE_2,  ROOT_CAUSE_3  -a determinar siguiendo modelo Boston-
+-	IS_SHOWN: en esta columna indicamos si la variable es causa raíz (1= SI, 0 = NO) y por tanto ha de ser mostrada (se filtra) en la salida del módulo de explicabilidad. Se determinará en función del spike con el usuario. Si la var
+-	IS_FACTOR:  Determina si la variable es numérica o categórica (numérica=0, categórica=1)
+
+ (opcional) Modelo entrenado con las variables contenidas en el tablón de entrenamiento/scoring. Actualmente el módulo contempla modelos xgboost generados con la librería caret y lda (linear discriminant analysis), generados a partir de la librería MASS.  (Fijar pars$modeling = FALSE en fichero de configuración del módulo)
+
+-	**Code**
+
+-	**Output**
+
+# **Inputs requeridos**
+
+# **Descripción del módulo:**
+
+1.	Fichero de configuración
+
+2.	Pipeline
+
+Carga de environment y parámetros de entrada
+Carga y transformación de datos de entrada
+Entrenamiento modelo 
+Funciones de explicabilidad
+Postproceso
+Escritura
+
+3.	Funciones anexas
